@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Tween } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
-	import InteractiveTag from '$lib/components/lab/interactive-tag.svelte';
 	import Dial from '$lib/components/lab/dial.svelte';
 	import AnimatedNumber from '$lib/components/lab/animated-number.svelte';
 	import { ToggleGroup, ToggleGroupItem } from '$lib/components/ui/toggle-group';
@@ -102,8 +101,6 @@
 </script>
 
 <div class="border-border/70 bg-card relative overflow-hidden rounded-2xl border shadow-sm">
-	<InteractiveTag label="Drag to explore" />
-
 	<div class="grid gap-0 lg:grid-cols-[1fr_0.85fr]">
 		<!-- controls -->
 		<div class="space-y-6 p-6">
@@ -115,6 +112,7 @@
 				label="Bodyweight"
 				display="{kg} kg"
 				accent="var(--protein)"
+				showHint
 			/>
 			<Dial
 				bind:value={gPerKg}

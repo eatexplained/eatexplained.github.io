@@ -3,7 +3,6 @@
 	import Dial from '$lib/components/lab/dial.svelte';
 	import FuelCurve from './fuel-curve.svelte';
 	import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from '$lib/components/ui/tooltip';
-	import InteractiveTag from '$lib/components/lab/interactive-tag.svelte';
 	import FuelEngine from './fuel-engine.svelte';
 
 	let intensity = $state(32);
@@ -36,8 +35,6 @@
 </script>
 
 <div class="border-border/70 bg-card relative overflow-hidden rounded-2xl border shadow-sm">
-	<InteractiveTag label="Drag to explore" />
-
 	<!-- the live engine: belts carry fuel into the muscle, energy comes out -->
 	<div class="relative h-60 sm:h-64">
 		<FuelEngine
@@ -95,6 +92,7 @@
 				display={intensityLabel}
 				accent="var(--carb)"
 				hint="How hard you are working, from sitting still to all-out."
+				showHint
 			/>
 			<Dial
 				bind:value={insulin}

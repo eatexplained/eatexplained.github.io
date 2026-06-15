@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Slider } from '$lib/components/ui/slider';
 	import MoveHorizontal from '@lucide/svelte/icons/move-horizontal';
+	import Pointer from '@lucide/svelte/icons/pointer';
 
 	let {
 		value = $bindable(),
@@ -10,7 +11,8 @@
 		label,
 		hint,
 		display,
-		accent = 'var(--carb)'
+		accent = 'var(--carb)',
+		showHint = false
 	}: {
 		value: number;
 		min?: number;
@@ -20,7 +22,15 @@
 		hint?: string;
 		display?: string;
 		accent?: string;
+		showHint?: boolean;
 	} = $props();
+
+	// Once the user moves the dial, the "drag" affordance has done its job.
+	const initial = value;
+	let hintGone = $state(false);
+	$effect(() => {
+		if (value !== initial) hintGone = true;
+	});
 </script>
 
 <div class="dial space-y-2.5" style="--dial-accent: {accent};">
@@ -31,7 +41,17 @@
 			{display}
 		</span>
 	</div>
-	<Slider type="single" bind:value {min} {max} {step} class="dial-slider" />
+	<div class="relative">
+		{#if showHint && !hintGone}
+			<span
+				class="drag-hint bg-background/90 text-muted-foreground pointer-events-none absolute -top-1 left-1/2 z-10 inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium shadow-sm backdrop-blur"
+			>
+				<Pointer class="size-3" />
+				Drag to explore
+			</span>
+		{/if}
+		<Slider type="single" bind:value {min} {max} {step} class="dial-slider" />
+	</div>
 	{#if hint}
 		<p class="text-muted-foreground text-xs">{hint}</p>
 	{/if}
@@ -85,6 +105,32 @@
 	}
 	@media (prefers-reduced-motion: reduce) {
 		.dial :global(.dial-slider [data-slot='slider-thumb']) {
+			animation: none;
+		}
+	}
+
+	/* "Drag to explore" pill, anchored above the slider track (not over the readout) */
+	.drag-hint {
+		transform: translate(-50%, -100%);
+		animation: hint-in 0.45s ease both 0.25s;
+	}
+	.drag-hint::after {
+		content: '';
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+		border: 5px solid transparent;
+		border-top-color: var(--border);
+	}
+	@keyframes hint-in {
+		from {
+			opacity: 0;
+			transform: translate(-50%, calc(-100% + 5px));
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.drag-hint {
 			animation: none;
 		}
 	}

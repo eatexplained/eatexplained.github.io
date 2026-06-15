@@ -1,5 +1,4 @@
 <script lang="ts">
-	import InteractiveTag from '$lib/components/lab/interactive-tag.svelte';
 	import Dial from '$lib/components/lab/dial.svelte';
 	import AnimatedNumber from '$lib/components/lab/animated-number.svelte';
 
@@ -66,8 +65,6 @@
 </script>
 
 <div class="border-border/70 bg-card relative overflow-hidden rounded-2xl border shadow-sm">
-	<InteractiveTag label="Drag to explore" />
-
 	<div class="space-y-5 p-6">
 		<div class="grid gap-5 sm:grid-cols-2">
 			<Dial
@@ -78,6 +75,7 @@
 				label="Daily calories vs maintenance"
 				display={deltaLabel}
 				accent="var(--carb)"
+				showHint
 			/>
 			<Dial
 				bind:value={startKg}

@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Dial from '$lib/components/lab/dial.svelte';
-	import InteractiveTag from '$lib/components/lab/interactive-tag.svelte';
 
 	// rough numbers for a ~70kg person, kcal
 	const GLYCOGEN_CAP = 1800;
@@ -25,7 +24,6 @@
 </script>
 
 <div class="border-border/70 bg-card relative space-y-6 rounded-2xl border p-6 shadow-sm">
-	<InteractiveTag label="Drag the slider" />
 	<!-- to-scale fuel gauge -->
 	<div>
 		<p class="text-muted-foreground mb-2 text-xs font-medium tracking-widest uppercase">
@@ -80,6 +78,7 @@
 		label="Hours since your last meal (resting)"
 		display="{hours} h"
 		accent="var(--energy)"
+		showHint
 	/>
 	<p class="text-muted-foreground text-sm leading-relaxed">{note}</p>
 </div>
