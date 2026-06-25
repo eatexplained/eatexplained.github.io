@@ -4,9 +4,9 @@
 	// rough numbers for a ~70kg person, kcal
 	const GLYCOGEN_CAP = 1800;
 	const FAT_CAP = 100000;
-	const BURN_PER_HOUR = 90; // resting
+	const BURN_PER_HOUR = 600; // hard endurance effort, fuelled mostly by glycogen
 
-	let hours = $state(6);
+	let hours = $state(0);
 
 	const burned = $derived(hours * BURN_PER_HOUR);
 	const glycogenLeft = $derived(Math.max(0, GLYCOGEN_CAP - burned));
@@ -18,8 +18,8 @@
 
 	const note = $derived(
 		glycogenLeft > 0
-			? `Resting, you are topping energy mostly from glycogen. At this rate it lasts about ${(GLYCOGEN_CAP / BURN_PER_HOUR).toFixed(0)} hours.`
-			: `Glycogen is empty, so you are running on fat now. After ${hours} hours you have used only ${fatUsed.toLocaleString()} kcal of fat, barely a dent.`
+			? `Working hard, you burn mostly glycogen. At this pace it runs out in about ${(GLYCOGEN_CAP / BURN_PER_HOUR).toFixed(0)} hours, the point runners call hitting the wall. Then your body shifts to fat.`
+			: `Glycogen is empty (you have hit the wall), so you are running on fat now. After ${hours} hours you have used only ${fatUsed.toLocaleString()} kcal of fat, barely a dent.`
 	);
 </script>
 
@@ -74,8 +74,9 @@
 	<Dial
 		bind:value={hours}
 		min={0}
-		max={72}
-		label="Hours since your last meal (resting)"
+		max={6}
+		step={0.5}
+		label="Hours of hard exercise"
 		display="{hours} h"
 		accent="var(--energy)"
 		showHint
