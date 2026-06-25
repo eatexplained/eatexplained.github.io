@@ -45,6 +45,8 @@
 	const activity = $derived(ACTIVITY_LEVELS.find((a) => a.key === activityKey) ?? ACTIVITY_LEVELS[2]);
 	const goal = $derived(GOALS.find((g) => g.key === goalKey) ?? GOALS[1]);
 
+	// Protein target is set by the goal: more in a deficit and for building,
+	// less when just maintaining (see proteinPerKg on each goal).
 	const result = $derived(
 		calculate({
 			sex,
@@ -54,7 +56,8 @@
 			bodyFat: bodyFatPct / 100,
 			formula,
 			activityFactor: activity.factor,
-			goalFactor: goal.factor
+			goalFactor: goal.factor,
+			proteinPerKg: goal.proteinPerKg
 		})
 	);
 
@@ -136,7 +139,9 @@
 					<ToggleGroupItem value={g.key} class="text-xs">{g.label}</ToggleGroupItem>
 				{/each}
 			</ToggleGroup>
-			<p class="text-muted-foreground text-xs">{goal.hint}</p>
+			<p class="text-muted-foreground text-xs">
+				{goal.hint} · protein {goal.proteinPerKg} g/kg
+			</p>
 		</div>
 
 		<div class="space-y-2">

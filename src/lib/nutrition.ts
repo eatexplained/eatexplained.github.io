@@ -26,13 +26,17 @@ export interface Goal {
 	label: string;
 	/** multiplier applied to maintenance calories */
 	factor: number;
+	/** sensible default protein target (g per kg body mass) for this goal */
+	proteinPerKg: number;
 	hint: string;
 }
 
 export const GOALS: Goal[] = [
-	{ key: 'cut', label: 'Lose fat', factor: 0.8, hint: 'roughly 0.5 kg / week' },
-	{ key: 'maintain', label: 'Maintain', factor: 1, hint: 'hold steady' },
-	{ key: 'gain', label: 'Build muscle', factor: 1.1, hint: 'slow lean gain' }
+	// In a deficit you need the most protein to hold onto muscle; building wants
+	// the upper end too; maintaining sits lower. All within the 1.6-2.2 g/kg range.
+	{ key: 'cut', label: 'Lose fat', factor: 0.8, proteinPerKg: 2.2, hint: 'roughly 0.5 kg / week' },
+	{ key: 'maintain', label: 'Maintain', factor: 1, proteinPerKg: 1.8, hint: 'hold steady' },
+	{ key: 'gain', label: 'Build muscle', factor: 1.1, proteinPerKg: 2.0, hint: 'slow lean gain' }
 ];
 
 /** Pounds to kilograms. */

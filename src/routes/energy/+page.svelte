@@ -39,8 +39,8 @@
 	</div>
 
 	<p class="text-muted-foreground mx-auto mt-12 max-w-3xl px-4 text-lg leading-relaxed">
-		Anything you don't burn right away gets stored in one of two places. Drag the slider and watch
-		which one runs out first.
+		Anything you don't burn right away gets stored in one of two places. Push the pace into hard
+		exercise and watch which one runs out first.
 	</p>
 
 	<div class="mx-auto mt-6 max-w-3xl px-4">
@@ -48,8 +48,8 @@
 	</div>
 
 	<KeyPoint accent="var(--energy)">
-		Your carb tank is tiny (about a day). Your fat tank is enormous (weeks). That's the whole reason
-		fat exists: cheap, dense, long-term storage.
+		Your carb tank is tiny (a couple of hours of hard effort). Your fat tank is enormous (weeks).
+		That's the whole reason fat exists: cheap, dense, long-term storage.
 	</KeyPoint>
 
 	<ModuleNav slug="energy" />
